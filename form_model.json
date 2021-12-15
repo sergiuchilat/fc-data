@@ -1,0 +1,105 @@
+{
+  "1": {
+    "general_info": {
+      "full_name": "Johm Doe",
+      "short_name": null,
+      "register_number": null,
+      "insurance_number": null,
+      "okato_code": null,
+      "okpo_code": null
+    }
+  },
+  "2": {
+    "loan_info": {
+      "requested_sum": null,
+      "return_period": null,
+      "first_payment_deferral": null,
+      "first_payment_deferall_months": null,
+      "own_money": null,
+      "own_money_amount": null
+    },
+    "financial_plan": [
+      {
+        "name": null,
+        "number": null,
+        "amount": null
+      }
+    ],
+    "warranty": {
+      "guarantor_type": null,
+      "guarantor_name": null
+    },
+    "collateral_information": {
+      "guarantor_type": null
+    },
+    "collateral_information_objects": [
+      {
+        "name": null,
+        "description": null
+      }
+    ]
+  },
+  "3": {
+    "personal_info": {
+      "phone": null,
+      "fax": null,
+      "email": null,
+      "address": null
+    },
+    "business_places": [
+      {
+        "address": null,
+        "building_type": null,
+        "ownership_type": null
+      }
+    ],
+    "basic_activities": [
+      {
+        "type": null,
+        "percent": null,
+        "experience": null
+      }
+    ],
+    "licenses": [
+      {
+        "name": null,
+        "date": null,
+        "valability_period": null
+      }
+    ],
+    "social_impact": [
+      {
+        "type": null,
+        "value": null,
+        "unit": null
+      }
+    ],
+    "director_info": {
+      "name": null,
+      "mobile_phone": null,
+      "position": null,
+      "work_phone": null,
+      "address": null
+    },
+    "graduate": [
+      {
+        "type": null,
+        "experience_in_company": null,
+        "business_part": null,
+        "experience": null,
+        "previous_work": null
+      }
+    ],
+    "bookkeeper_info": {
+      "name": null,
+      "mobile_phone": null,
+      "position": null,
+      "work_phone": null,
+      "address": null
+    },
+    "employees_info": {
+      "amount": null,
+      "verage_salary": null
+    }
+  }
+}
