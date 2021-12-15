@@ -1,0 +1,569 @@
+{
+  "version": "loan.1.0.0",
+  "buttons": {
+    "previous": "Предыдущий шаг",
+    "save_draft": "сохранить черновик",
+    "next": "Продолжить",
+    "finish": "Завершить"
+  },
+  "steps": [
+    {
+      "number": 1,
+      "name": "Шаг 1",
+      "title": "Данные о заемщике",
+      "title_full": "Общие сведения о заемщике",
+      "blocks": [
+        {
+          "name": "general_info",
+          "title": null,
+          "fields": [
+            {
+              "type": "textfield",
+              "name": "full_name",
+              "label": "Полное наименование юридического лица / ФИО индивидуального предпринимателя:",
+              "columns": 12
+            },
+            {
+              "type": "textfield",
+              "name": "short_name",
+              "label": "Сокращенное наименование юридического лица / ФИО индивидуального предпринимателя:",
+              "columns": 12
+            },
+            {
+              "type": "textfield",
+              "name": "register_number",
+              "label": "Регистрационный номер (ОГРН/ОГРНИП):",
+              "columns": 12
+            },
+            {
+              "type": "textfield",
+              "name": "insurance_number",
+              "label": "Страховой номер индивидуального лицевого счета /СНИЛС (для физических лиц)",
+              "columns": 12
+            },
+            {
+              "type": "textfield",
+              "name": "okato_code",
+              "label": "Код ОКАТО (при наличии)",
+              "columns": 6
+            },
+            {
+              "type": "textfield",
+              "name": "okpo_code",
+              "label": "Код ОКПО (при наличии)",
+              "columns": 6
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "number": 2,
+      "name": "Шаг 2",
+      "title": "Сведения о запрашиваемой услуге",
+      "title_full": "Общие сведения о запрашиваемой финансовой услуге",
+      "blocks": [
+        {
+          "name": "loan_info",
+          "title": "Займ (микрозайм):",
+          "fields": [
+            {
+              "type": "money",
+              "name": "requested_sum",
+              "label": "Запрашиваемая сумма, руб.",
+              "columns": 6
+            },
+            {
+              "type": "number",
+              "name": "return_period",
+              "label": "Срок возврата займа, мес.",
+              "columns": 6
+            },
+            {
+              "type": "checkbox",
+              "name": "first_payment_deferral",
+              "label": "Отсрочка первого платежа по сумме займа (месяцев)",
+              "columns": 7,
+              "linked_fields": {
+                "show_on_ckeck": [
+                  "first_payment_deferall_months"
+                ]
+              }
+            },
+            {
+              "type": "number",
+              "name": "first_payment_deferall_months",
+              "label": "Кол-во месяцев отсрочки",
+              "columns": 5
+            },
+            {
+              "type": "checkbox",
+              "name": "own_money",
+              "label": "Собственные средства привлекаемые для реализации проекта",
+              "columns": 7
+            },
+            {
+              "type": "money",
+              "name": "own_money_amount",
+              "label": "Сумма собственных средств, руб.",
+              "columns": 5,
+              "show_if": {
+                "field": "own_money",
+                "value": "NOT_EMPY"
+              }
+            }
+          ]
+        },
+        {
+          "name": "financial_plan",
+          "title": "Целевое использование займа (план финансирования):",
+          "array_fields": true,
+          "buttons": {
+            "add": "Добавить строчку",
+            "remove": "Удалить строчку"
+          },
+          "fields": [
+            {
+              "type": "textfield",
+              "name": "name",
+              "label": "Наименование, номер",
+              "columns": 6
+            },
+            {
+              "type": "textfield",
+              "name": "number",
+              "label": "ОКВЭД 029-2001",
+              "columns": 3
+            },
+            {
+              "type": "money",
+              "name": "amount",
+              "label": "Сумма, руб.",
+              "columns": 2
+            }
+          ]
+        },
+        {
+          "name": "warranty",
+          "title": "Поручительство (гарантия):",
+          "fields": [
+            {
+              "type": "radio_group",
+              "name": "guarantor_type",
+              "columns": 12,
+              "items": [
+                {
+                  "label": "Юридического лица",
+                  "value": "Юридического лица"
+                },
+                {
+                  "label": "Индивидуального предпринимателя",
+                  "value": "Индивидуального предпринимателя"
+                },
+                {
+                  "label": "Физического лица",
+                  "value": "Физического лица"
+                },
+                {
+                  "label": "Государственная, муниципальная или банковская гарантия",
+                  "value": "Государственная, муниципальная или банковская гарантия"
+                },
+                {
+                  "label": "Нет",
+                  "value": "Нет"
+                }
+              ]
+            },
+            {
+              "type": "textfield",
+              "name": "guarantor_name",
+              "label": "Наименование поручителя / ФИО поручителя",
+              "columns": 12,
+              "show_if": {
+                "field": "guarantor_type",
+                "value_not": "Нет"
+              }
+            }
+          ]
+        },
+        {
+          "name": "collateral_information",
+          "title": "Сведения о залоге",
+          "fields": [
+            {
+              "type": "checkbox_group",
+              "name": "guarantor_type",
+              "columns": 12,
+              "items": [
+                {
+                  "label": "Недвижимость (за исключением жилых домов, помещений и квартир)",
+                  "value": "Недвижимость (за исключением жилых домов, помещений и квартир)"
+                },
+                {
+                  "label": "Движимое имущество (оборудование, механизмы, модули, блоки, павильоны и т.д.)",
+                  "value": "Движимое имущество (оборудование, механизмы, модули, блоки, павильоны и т.д.)"
+                },
+                {
+                  "label": "Транспортные средства (самоходная техника)",
+                  "value": "Транспортные средства (самоходная техника)"
+                },
+                {
+                  "label": "Товары в обороте",
+                  "value": "Товары в обороте"
+                },
+                {
+                  "label": "Ценные бумаги",
+                  "value": "Ценные бумаги"
+                },
+                {
+                  "label": "Прочее",
+                  "value": "Прочее"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "collateral_information_objects",
+          "title": null,
+          "array_fields": true,
+          "buttons": {
+            "add": "Добавить строчку",
+            "remove": "Удалить строчку"
+          },
+          "fields": [
+            {
+              "type": "textfield",
+              "name": "name",
+              "label": "Наименование объекта",
+              "columns": 11
+            },
+            {
+              "type": "textarea",
+              "name": "description",
+              "label": "Описание объекта (владелец, адрес, год выпуска, место хранения, рыночная стоимость)",
+              "columns": 11
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "number": 3,
+      "name": "Шаг 3",
+      "title": "Данные юридического лица / ИП",
+      "title_full": "Данные юридического лица / ИП",
+      "blocks": [
+        {
+          "name": "personal_info",
+          "title": null,
+          "fields": [
+            {
+              "type": "textfield",
+              "name": "phone",
+              "label": "Номер телефона",
+              "columns": 4
+            },
+            {
+              "type": "textfield",
+              "name": "fax",
+              "label": "Факс (при наличии)",
+              "columns": 4
+            },
+            {
+              "type": "textfield",
+              "name": "email",
+              "label": "E-mail",
+              "columns": 4
+            },
+            {
+              "type": "textfield",
+              "name": "address",
+              "label": "Почтовый адрес",
+              "columns": 12
+            }
+          ]
+        },
+        {
+          "name": "business_places",
+          "title": "Место ведения бизнеса",
+          "array_fields": true,
+          "buttons": {
+            "add": "Добавить объект",
+            "remove": "Удалить объект"
+          },
+          "fields": [
+            {
+              "type": "textfield",
+              "name": "address",
+              "label": "Адрес фактический",
+              "columns": 11
+            },
+            {
+              "type": "select",
+              "name": "building_type",
+              "label": "Вид помещения",
+              "columns": 6,
+              "items": [
+                {
+                  "text": "Небоскреб",
+                  "value": "Небоскреб"
+                },
+                {
+                  "text": "Погреб",
+                  "value": "Погреб"
+                }
+              ]
+            },
+            {
+              "type": "select",
+              "name": "ownership_type",
+              "label": "Право пользования",
+              "columns": 5,
+              "items": [
+                {
+                  "text": "Собственник",
+                  "value": "Собственник"
+                },
+                {
+                  "text": "Арендатор",
+                  "value": "Арендатор"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "basic_activities",
+          "title": "Основные виды деятельности (ОКВЭД 029-2001)",
+          "array_fields": true,
+          "buttons": {
+            "add": "Добавить вид деятельности",
+            "remove": "Удалить вид деятельности"
+          },
+          "fields": [
+            {
+              "type": "textfield",
+              "name": "type",
+              "label": "Вид деятельности",
+              "columns": 6
+            },
+            {
+              "type": "number",
+              "name": "percent",
+              "label": "Доля в общем объеме, %",
+              "columns": 3
+            },
+            {
+              "type": "number",
+              "name": "experience",
+              "label": "Опыт работы в данном бизнесе (лет)",
+              "columns": 2
+            }
+          ]
+        },
+        {
+          "name": "licenses",
+          "title": "Наличие специальных разрешений (лицензий), членство в СРО",
+          "array_fields": true,
+          "buttons": {
+            "add": "Добавить лицензию",
+            "remove": "Удалить лицензию"
+          },
+          "fields": [
+            {
+              "type": "textfield",
+              "name": "name",
+              "label": "Наименование, номер",
+              "columns": 6
+            },
+            {
+              "type": "textfield",
+              "name": "date",
+              "label": "Дата выдачи, вступления",
+              "columns": 3
+            },
+            {
+              "type": "number",
+              "name": "valability_period",
+              "label": "Срок действия",
+              "columns": 2
+            }
+          ]
+        },
+        {
+          "name": "social_impact",
+          "title": "Планируемый социально-значимый эффект от использования полученных средств или имущества",
+          "array_fields": true,
+          "buttons": {
+            "add": "Добавить показатель",
+            "remove": "Удалить показатель"
+          },
+          "fields": [
+            {
+              "type": "select",
+              "name": "type",
+              "label": "Вид показателя",
+              "columns": 11,
+              "items": [
+                {
+                  "text": "Создание рабочих мест",
+                  "value": "Создание рабочих мест"
+                },
+                {
+                  "text": "Прочее",
+                  "value": "Прочее"
+                }
+              ]
+            },
+            {
+              "type": "number",
+              "name": "value",
+              "label": "Планируемые значения",
+              "columns": 5
+            },
+            {
+              "type": "textfield",
+              "name": "unit",
+              "label": "Единицы измерения",
+              "columns": 6
+            }
+          ]
+        },
+        {
+          "name": "director_info",
+          "title": "Сведения о руководителе юридического лица",
+          "fields": [
+            {
+              "type": "textfield",
+              "name": "name",
+              "label": "ФИО",
+              "columns": 6
+            },
+            {
+              "type": "textfield",
+              "name": "mobile_phone",
+              "label": "Номер телефона (мобильный)",
+              "columns": 6
+            },
+            {
+              "type": "textfield",
+              "name": "position",
+              "label": "Должность",
+              "columns": 6
+            },
+            {
+              "type": "textfield",
+              "name": "work_phone",
+              "label": "Номер телефона (рабочий)",
+              "columns": 6
+            },
+            {
+              "type": "textfield",
+              "name": "address",
+              "label": "Адрес проживания",
+              "columns": 12
+            }
+
+          ]
+        },
+        {
+          "name": "graduate",
+          "title": null,
+          "array_fields": true,
+          "buttons": {
+            "add": "Добавить строчку",
+            "remove": "Удалить строчку"
+          },
+          "fields": [
+            {
+              "type": "textfield",
+              "name": "type",
+              "label": "Образование",
+              "columns": 11
+            },
+            {
+              "type": "number",
+              "name": "experience_in_company",
+              "label": "Стаж работы в компании, лет",
+              "columns": 4
+            },
+            {
+              "type": "number",
+              "name": "business_part",
+              "label": "Доля в капитале",
+              "columns": 4
+            },
+            {
+              "type": "number",
+              "name": "experience",
+              "label": "Стаж работы в отрасли",
+              "columns": 3
+            },
+            {
+              "type": "textarea",
+              "name": "previous_work",
+              "label": "Предыдущее место работы, отрасль, должность",
+              "columns": 11
+            }
+          ]
+        },
+        {
+          "name": "bookkeeper_info",
+          "title": "Сведения о главном бухгалтере / Счетном работнике",
+          "fields": [
+            {
+              "type": "textfield",
+              "name": "name",
+              "label": "ФИО",
+              "columns": 6
+            },
+            {
+              "type": "textfield",
+              "name": "mobile_phone",
+              "label": "Номер телефона (мобильный)",
+              "columns": 6
+            },
+            {
+              "type": "textfield",
+              "name": "position",
+              "label": "Должность",
+              "columns": 6
+            },
+            {
+              "type": "textfield",
+              "name": "work_phone",
+              "label": "Номер телефона (рабочий)",
+              "columns": 6
+            },
+            {
+              "type": "textfield",
+              "name": "address",
+              "label": "Адрес проживания",
+              "columns": 12
+            }
+
+          ]
+        },
+        {
+          "name": "employees_info",
+          "title": "Данные о сотрудниках",
+          "fields": [
+            {
+              "type": "number",
+              "name": "amount",
+              "label": "Общее кол-во сотрудников",
+              "columns": 6
+            },
+            {
+              "type": "money",
+              "name": "verage_salary",
+              "label": "Средний уровень з/п (в месяц)",
+              "columns": 6
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
